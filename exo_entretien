@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+# coding: utf-8
+import urllib, json, emoji
+
+import urllib, json, emoji
+def get_url_to_json(url): # Give an url and return the json
+    response = urllib.request.urlopen(url) #Request the Url
+    data = json.loads(response.read()) #Get the Json from the response of the Url
+    return data
+
+
+def check_json_content(data):
+    keyuser, keyemail, keyos = "username", "email", "user_agent" #Set the mandatory table
+
+    if keyos in data and keyuser in data and keyemail in data: #check if the table exist in the json
+        if data[keyos].find("Windows") > 0: #Check if the os is Windows
+            print("L'adresse mail de l'utilisateur {} est {}. Iel utilise le système d'exploitation \U0001FA9F".format(data[keyuser],data[keyemail])) #Print Windows line
+        if data[keyos].find("Linux") > 0:    #Check if the os is Linux
+            print("L'adresse mail de l'utilisateur {} est {}. Iel utilise le système d'exploitation \U0001F427".format(data[keyuser],data[keyemail])) #Print Linux line
+        if data[keyos].find("Android") > 0:   #Check if the os is Android
+            print("L'adresse mail de l'utilisateur {} est {}. Iel utilise le système d'exploitation \U0001F916".format(data[keyuser],data[keyemail])) #Print Android line
+        if data[keyos].find("Macintosh") > 0: #Check if the os is Macintosh
+            print("L'adresse mail de l'utilisateur {} est {}. Iel utilise le système d'exploitation \U0001F34E".format(data[keyuser],data[keyemail])) #Print Macintosh line
